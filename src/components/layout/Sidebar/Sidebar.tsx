@@ -1,0 +1,27 @@
+'use client';
+
+import React from 'react';
+import styles from './Sidebar.module.css';
+import Logo from '@/components/ui/Logo/Logo';
+import Navigation from '@/components/ui/Navigation/Navigation';
+import OperatorSection from '@/components/ui/OperatorSection/OperatorSection';
+import { SidebarProps } from '@/shared/types/navigation';
+
+const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
+
+  return (
+    <aside className={`${styles.sidebar} ${className}`}>
+      <Logo />
+
+      <div className={styles.siteTitle}>
+        nomrezade.az
+      </div>
+
+      <Navigation />
+
+      <OperatorSection />
+    </aside>
+  );
+};
+
+export default Sidebar;

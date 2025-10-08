@@ -1,0 +1,537 @@
+/* Numbers List Section - NumbersListing Style */
+.tableSection {
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tableContainer {
+  padding: .5rem;
+  background-color: var(--color-accent-overlay);
+  border-radius: 12px;
+  gap: 0.75rem;
+}
+
+/* Desktop List Layout */
+.desktopList {
+  display: block;
+  width: 100%;
+}
+
+.listItem {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.listItem:hover {
+  border-color: var(--color-primary);
+}
+
+.listItemContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+}
+
+.cellNumber {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.operatorLogo {
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.phoneNumber {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.sellerNumber {
+  color: var(--color-red);
+  font-weight: 700;
+}
+
+.cellProvider {
+  display: flex;
+  align-items: center;
+}
+
+.provider {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+  font-weight: 500;
+}
+
+.cellType {
+  display: flex;
+  align-items: center;
+}
+
+/* Type Tag Styles - Shared */
+.typeTag,
+.mobileTypeTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.typeTag.standard,
+.mobileTypeTag.standard {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.typeTag.premium,
+.mobileTypeTag.premium {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.typeTag.gold,
+.mobileTypeTag.gold {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+.cellPrice {
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-green);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.priceAmount {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.priceSymbol {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.cellContact {
+  display: flex;
+  align-items: center;
+}
+
+.contactPhone {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+}
+
+.cellActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.actionButton {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  color: var(--color-gray);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Action Button Hover Styles - Shared */
+.actionButton:hover,
+.mobileActionButton:hover {
+  color: var(--color-primary);
+  background-color: rgba(197, 159, 50, 0.1);
+  border-color: var(--color-primary);
+}
+
+.actionButton:first-child:hover,
+.mobileActionButton:first-child:hover {
+  color: var(--color-blue);
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-blue);
+}
+
+.actionButton:last-child:hover,
+.mobileActionButton:last-child:hover {
+  color: var(--color-red);
+  background-color: rgba(220, 38, 38, 0.1);
+  border-color: var(--color-red);
+}
+
+/* Mobile List Layout */
+.mobileList {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobileCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.mobileCard:hover {
+  border-color: var(--color-primary);
+}
+
+.mobileCardContent {
+  padding: 1rem;
+}
+
+.mobileTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.mobileLeftSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobilePhoneNumber {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.mobileRightSection {
+  display: flex;
+  align-items: center;
+}
+
+.mobileBottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mobilePriceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobilePrice {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-green);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.mobileProvider {
+  font-size: 0.75rem;
+  color: var(--color-gray);
+  font-weight: 500;
+}
+
+.mobileActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mobileActionButton {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  color: var(--color-gray);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileContactRow {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.mobileContactPhone {
+  font-size: 0.75rem;
+  color: var(--color-gray);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, var(--color-accent-overlay) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  margin: 2rem 0;
+  min-height: 300px;
+}
+
+.emptyIcon {
+  margin-bottom: 1rem;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.emptySubtitle {
+  font-size: 1rem;
+  color: var(--color-gray);
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+/* Search Highlight Styles */
+.highlight {
+  background: var(--color-yellow);
+  color: var(--color-black);
+  font-weight: 700;
+  padding: 0.125rem 0.25rem;
+  margin: 0 0.1rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
+}
+
+/* Skeleton Loading Styles - Shared */
+.skeletonPhoneNumber,
+.skeletonMobilePhoneNumber {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonPhoneNumber {
+  width: 120px;
+  height: 16px;
+}
+
+.skeletonMobilePhoneNumber {
+  width: 140px;
+  height: 16px;
+}
+
+.skeletonProvider,
+.skeletonMobileProvider {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonProvider {
+  width: 60px;
+  height: 14px;
+}
+
+.skeletonMobileProvider {
+  width: 50px;
+  height: 12px;
+}
+
+.skeletonTypeTag,
+.skeletonMobileTypeTag {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeletonTypeTag {
+  width: 70px;
+  height: 20px;
+}
+
+.skeletonMobileTypeTag {
+  width: 60px;
+  height: 20px;
+}
+
+.skeletonPrice,
+.skeletonMobilePrice {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonPrice {
+  width: 50px;
+  height: 18px;
+}
+
+.skeletonMobilePrice {
+  width: 60px;
+  height: 18px;
+  margin-bottom: 4px;
+}
+
+.skeletonContact {
+  width: 100px;
+  height: 14px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonActionButton,
+.skeletonMobileActionButton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeletonActionButton {
+  width: 36px;
+  height: 36px;
+}
+
+.skeletonMobileActionButton {
+  width: 32px;
+  height: 32px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .desktopList {
+    display: none;
+  }
+  
+  .mobileList {
+    display: flex;
+  }
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 15px 10px 0px 10px;
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(198, 159, 50, 0.1);
+  transform: translateY(-1px);
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pageButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-gray);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pageButton:hover {
+  background: rgba(198, 159, 50, 0.1);
+  color: var(--color-accent);
+}
+
+.pageButton.activePage {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}

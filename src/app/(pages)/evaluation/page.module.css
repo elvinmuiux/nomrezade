@@ -1,0 +1,358 @@
+/* Evaluation Page Styles - Refined Design */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--color-primary-overlay), var(--color-accent-overlay));
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  font-size: 1.25rem;
+  color: var(--color-gray);
+  margin: 0;
+  font-weight: 400;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.statCard {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.statCard:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.statCard h3 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ratingNumber {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-shadow: 0 2px 4px rgba(197, 159, 50, 0.2);
+}
+
+.ratingStars {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  filter: drop-shadow(0 2px 4px rgba(197, 159, 50, 0.3));
+}
+
+.count {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(66, 92, 91, 0.2);
+}
+
+.feedbacks {
+  margin-top: 4rem;
+}
+
+.feedbacks h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.feedbacks h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 2px;
+}
+
+.feedbackList {
+  display: grid;
+  gap: 2rem;
+}
+
+.feedbackCard {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feedbackCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-accent), var(--color-primary));
+}
+
+.feedbackCard:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feedbackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.userInfo h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.01em;
+}
+
+.feedbackType {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+}
+
+.feedbackContent {
+  margin-bottom: 1.5rem;
+}
+
+.feedbackContent h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 0.01em;
+}
+
+.feedbackContent p {
+  color: var(--color-gray);
+  line-height: 1.7;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.feedbackMeta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  font-weight: 500;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.noFeedbacks {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--color-secondary);
+  border: 2px dashed var(--color-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.noFeedbacks::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.noFeedbacks p {
+  font-size: 1.25rem;
+  color: var(--color-gray);
+  margin: 0;
+  font-weight: 500;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  background: var(--color-secondary);
+  border-radius: 16px;
+}
+
+.loading h2 {
+  color: var(--color-gray);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.error {
+  text-align: center;
+  padding: 4rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid var(--color-red);
+  border-radius: 16px;
+}
+
+.error h2 {
+  color: var(--color-red);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.retryButton {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: var(--color-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(66, 92, 91, 0.3);
+}
+
+.retryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(66, 92, 91, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .header h1 {
+    font-size: 2.25rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .statCard {
+    padding: 2rem;
+  }
+
+  .ratingNumber,
+  .count {
+    font-size: 3rem;
+  }
+
+  .feedbackHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .feedbackMeta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feedbacks h2 {
+    font-size: 1.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .ratingNumber,
+  .count {
+    font-size: 2.5rem;
+  }
+
+  .feedbackCard {
+    padding: 1.5rem;
+  }
+
+  .statCard {
+    padding: 1.5rem;
+  }
+}

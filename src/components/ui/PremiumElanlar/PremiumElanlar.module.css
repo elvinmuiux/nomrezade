@@ -1,0 +1,570 @@
+/**
+ * PremiumElanlar Component Styles
+ * Responsive design for Premium Ads component
+ */
+
+/* ===== CONTAINER ===== */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+
+  border-radius: 12px;
+  padding: 0.5rem;
+  padding-bottom: 15px;
+  background-color: var(--color-accent-overlay);
+}
+
+/* ===== DESKTOP LAYOUT ===== */
+.desktopContainer {
+  display: block;
+  width: 100%;
+}
+
+.desktopContainer .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.desktopContainer .titleSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.desktopContainer .countBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-overlay);
+  color: var(--color-primary);
+}
+
+.desktopContainer .countNumber {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-primary);
+}
+
+.desktopContainer .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.desktopContainer .viewAllButton {
+  padding: 5px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.desktopContainer .viewAllButton:hover {
+  background: var(--color-accent-overlay);
+}
+
+.desktopContainer .viewAllButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.desktopContainer .cardsContainer {
+  position: relative;
+  width: 100%;
+}
+
+.desktopContainer .cardsWrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Large Desktop: ≥1200px (Sidebar: 280px) */
+@media (min-width: 1200px) {
+  .desktopContainer .cardsWrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop: 993px - 1199px (Sidebar: 280px) */
+@media (max-width: 1199px) and (min-width: 993px) {
+  .desktopContainer .cardsWrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.desktopContainer .navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.desktopContainer .navButton:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.desktopContainer .navButtonLeft {
+  left: -20px;
+}
+
+.desktopContainer .navButtonRight {
+  right: -20px;
+}
+
+.desktopContainer .progressIndicator {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.desktopContainer .progressTrack {
+  width: 200px;
+  height: 4px;
+  background: var(--color-white);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.desktopContainer .progressThumb {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+/* ===== MOBILE LAYOUT ===== */
+.mobileContainer {
+  display: none;
+  width: 100%;
+}
+
+.mobileContainer .mobileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.mobileContainer .mobileTitleSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobileContainer .mobileCountBadge {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-overlay);
+  color: var(--color-primary);
+}
+
+.mobileContainer .mobileCountNumber {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.mobileContainer .mobileTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.mobileContainer .mobileViewAllButton {
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobileContainer .mobileViewAllButton:hover {
+  background: var(--color-accent-overlay);
+}
+
+.mobileContainer .mobileViewAllButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mobileContainer .mobileCardContainer {
+  position: relative;
+  width: 100%;
+}
+
+.mobileContainer .mobileNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.mobileContainer .mobileNavButton:hover {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+.mobileContainer .mobileNavButtonLeft {
+  left: -16px;
+}
+
+.mobileContainer .mobileNavButtonRight {
+  right: -16px;
+}
+
+.mobileContainer .mobileProgressIndicator {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.mobileContainer .mobileProgressTrack {
+  width: 120px;
+  height: 3px;
+  background: var(--color-white);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileContainer .mobileProgressThumb {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+/* ===== PREMIUM CARD ===== */
+.premiumCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.premiumCard .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.premiumCard .phoneNumber {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-black);
+  line-height: 1.2;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.premiumCard .premiumTag {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.premiumCard .cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.premiumCard .price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.premiumCard .priceAmount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.premiumCard .priceSymbol {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.premiumCard .contactButton {
+  padding: 8px 12px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.premiumCard .contactButton:hover {
+  background: var(--color-accent);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.premiumCard .contactText {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* ===== MOBILE CARD VARIANTS ===== */
+.mobileCard {
+  padding: 16px;
+}
+
+.mobileCard .phoneNumber {
+  font-size: 18px;
+}
+
+.mobileCard .price {
+  font-size: 16px;
+}
+
+.mobileCard .contactButton {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.mobileCard .contactIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.mobileCard .contactText {
+  font-size: 12px;
+}
+
+/* ===== SKELETON LOADING ===== */
+.skeletonCard,
+.mobileSkeletonCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.mobileSkeletonCard {
+  padding: 16px;
+}
+
+.skeletonHeader,
+.mobileSkeletonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.skeletonPhoneNumber,
+.mobileSkeletonPhoneNumber {
+  width: 60%;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.mobileSkeletonPhoneNumber {
+  height: 20px;
+}
+
+.skeletonTag,
+.mobileSkeletonTag {
+  width: 60px;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.mobileSkeletonTag {
+  width: 50px;
+  height: 16px;
+}
+
+.skeletonFooter,
+.mobileSkeletonFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.skeletonPrice,
+.mobileSkeletonPrice {
+  width: 80px;
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.mobileSkeletonPrice {
+  width: 60px;
+  height: 16px;
+}
+
+.skeletonButton,
+.mobileSkeletonButton {
+  width: 100px;
+  height: 32px;
+  background: #e0e0e0;
+  border-radius: 6px;
+}
+
+.mobileSkeletonButton {
+  width: 80px;
+  height: 28px;
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState,
+.mobileEmptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.mobileEmptyState {
+  padding: 30px 16px;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+/* Tablet: 769px - 1325px (Sidebar: 55px) */
+@media (max-width: 1325px) and (min-width: 769px) {
+  .desktopContainer .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small Tablet: 581px - 768px (Sidebar: 55px) */
+@media (max-width: 768px) and (min-width: 581px) {
+  .desktopContainer .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: ≤580px (Sidebar: Full width, 60px height) */
+@media (max-width: 580px) {
+  .desktopContainer {
+    display: none;
+  }
+
+  .mobileCard {
+    margin-top: 5px;
+    padding-bottom: 14px;
+  }
+  
+  .mobileContainer {
+    display: block;
+    margin-top: 5px;
+    padding-bottom: 14px;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileContainer .mobileTitle {
+    font-size: 16px;
+  }
+  
+  .mobileContainer .mobileViewAllButton {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+  
+  .mobileCard {
+    padding: 12px;
+  }
+  
+  .mobileCard .phoneNumber {
+    font-size: 16px;
+  }
+  
+  .mobileCard .price {
+    font-size: 14px;
+  }
+}

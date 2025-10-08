@@ -1,0 +1,171 @@
+.phoneGoldContainer {
+  padding: 1rem;
+}
+
+.phoneGoldHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.backButton {
+  color: #4B5563;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.headerSpacer {
+  width: 40px;
+  height: 40px;
+}
+
+.backButton:hover {
+  background-color: #F3F4F6;
+}
+
+.headerTitleContainer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.headerTitleContainer h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1F2937;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.headerIcon {
+  color: #D4AF37; /* Gold Color */
+  position: relative;
+  top: -1px; /* Align icon better with text */
+}
+
+.listingCount {
+  font-size: 0.9rem; /* Slightly smaller */
+  font-weight: 400;
+  color: #6B7280;
+  margin-left: 0.25rem; /* Add a small space */
+}
+
+.phoneGoldSearchContainer {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 2rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s,  0.2s;
+}
+
+.searchInput::placeholder {
+  color: #787878;
+}
+
+.searchInput:focus {
+  border-color: #C69F32;
+  : 0 0 0 3px rgba(198, 159, 50, 0.2);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+}
+
+.loadingState {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.phoneGoldList {
+  background-color: white;
+  border-radius: 0.5rem;
+  : 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneGoldListingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.phoneGoldListingItem:last-child {
+  border-bottom: none;
+}
+
+.phoneNumberContainer {
+  flex: 1;
+}
+
+.phoneNumber {
+  font-weight: 600;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.phoneNumber strong {
+  color: #D9534F; /* A standout red color */
+  font-weight: 700;
+}
+
+.price {
+  font-weight: 600;
+  color: #C69F32;
+  font-size: 1rem;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.callButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #425C5B;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.callButton:hover {
+  background-color: #314443;
+}
+
+.noListingsMessage {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 20px;
+}

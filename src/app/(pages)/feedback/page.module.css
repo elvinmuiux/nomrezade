@@ -1,0 +1,370 @@
+/* Feedback Page Styles - Refined Design */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, var(--color-primary-overlay), var(--color-accent-overlay));
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  font-size: 1.25rem;
+  color: var(--color-gray);
+  margin: 0;
+  font-weight: 400;
+}
+
+.feedbackForm {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.feedbackForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.form {
+  width: 100%;
+}
+
+.formGroup {
+  margin-bottom: 2rem;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-overlay);
+  transform: translateY(-1px);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: var(--color-gray);
+  font-weight: 400;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.formActions {
+  margin-top: 2.5rem;
+}
+
+.submitButton {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: var(--color-white);
+  padding: 1.25rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(66, 92, 91, 0.3);
+  letter-spacing: 0.01em;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(66, 92, 91, 0.4);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.contactInfo {
+  background: var(--color-secondary);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+.contactInfo h3 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+.contactMethods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.contactMethod {
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contactMethod::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+}
+
+.contactMethod:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.contactMethod h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.contactMethod p {
+  color: var(--color-gray);
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Success Message */
+.successMessage {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--color-secondary);
+  border: 2px solid var(--color-green);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.successMessage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-green), var(--color-accent));
+}
+
+.successMessage h2 {
+  font-size: 2rem;
+  color: var(--color-green);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.successMessage p {
+  color: var(--color-gray);
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(66, 92, 91, 0.3);
+  letter-spacing: 0.01em;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(66, 92, 91, 0.4);
+}
+
+.buttonSecondary {
+  background: var(--color-gray);
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(168, 168, 168, 0.3);
+  letter-spacing: 0.01em;
+}
+
+.buttonSecondary:hover {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(66, 92, 91, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .header h1 {
+    font-size: 2.25rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .feedbackForm {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1.5rem;
+  }
+
+  .contactMethods {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contactMethod {
+    padding: 1.5rem;
+  }
+
+  .contactInfo {
+    padding: 2rem;
+  }
+
+  .contactInfo h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button,
+  .buttonSecondary {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .successMessage {
+    padding: 3rem 1.5rem;
+  }
+
+  .successMessage h2 {
+    font-size: 1.75rem;
+  }
+
+  .successMessage p {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .feedbackForm {
+    padding: 1.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 16px;
+  }
+
+  .contactInfo {
+    padding: 1.5rem;
+  }
+
+  .successMessage {
+    padding: 2.5rem 1rem;
+  }
+
+  .successMessage h2 {
+    font-size: 1.5rem;
+  }
+}

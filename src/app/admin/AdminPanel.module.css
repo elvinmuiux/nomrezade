@@ -1,0 +1,246 @@
+/* Admin Panel Styles */
+.adminContainer {
+  min-height: 100vh;
+  background: var(--color-white);
+}
+
+/* Loading Styles */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Search and Filter Section */
+.filtersSection {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filterDropdowns {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.filterSelect {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+/* Loading State */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: var(--color-white);
+  border-radius: 12px;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Phone Input Container */
+.phoneInputContainer {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.prefixDisplay {
+  background: #f3f4f6;
+  padding: 0.75rem 1rem;
+  border-right: 1px solid #d1d5db;
+  font-weight: 600;
+  color: #374151;
+}
+
+.phoneInput {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  color: #000000 !important;
+  font-size: 1rem;
+}
+
+.phoneInput:disabled {
+  background: #f9fafb;
+  color: #9ca3af;
+}
+
+/* Form Input Styles */
+.priceInput {
+  color: #000000 !important;
+}
+
+.contactInput {
+  color: #000000 !important;
+}
+
+/* Black Text for Form Inputs */
+.blackText {
+  color: #000000 !important;
+}
+
+.blackText option {
+  color: #000000 !important;
+}
+
+/* Badges */
+.typeBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.typeBadge.regular {
+  background: #f0fdf4;
+  color: #000000;
+}
+
+.typeBadge.premium {
+  background: #fef7cd;
+  color: #a16207;
+}
+
+.typeBadge.vip {
+  background: #fdf4ff;
+  color: #a21caf;
+}
+
+.sellerBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Action Buttons */
+.editButton, .deleteButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.editButton {
+  background: #eff6ff;
+  color: #000000;
+  border: 1px solid #dbeafe;
+}
+
+.editButton:hover {
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
+.deleteButton {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+.deleteButton:hover {
+  background: #fee2e2;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filtersSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filterDropdowns {
+    justify-content: stretch;
+    flex-direction: column;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}

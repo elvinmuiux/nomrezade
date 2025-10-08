@@ -1,0 +1,172 @@
+
+.phonePremiumContainer {
+  padding: 1rem;
+}
+
+.phoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4B5563;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: #F3F4F6;
+}
+
+.phoneHeader h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1F2937;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.listingCount {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+.headerPlaceholder {
+  width: 80px; /* Eyni ölçüdə yer tutaraq başlığı mərkəzdə saxlayır */
+  flex-shrink: 0;
+}
+
+.phoneHeader h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #343a40;
+}
+
+.phoneSearchBar {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.phoneSearchBar input {
+  width: 100%;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 2rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s,  0.2s;
+}
+
+.phoneSearchBar input::placeholder {
+  color: #787878;
+  opacity: 1; /* Firefox üçün lazımdır */
+}
+
+.phoneSearchBar input:focus {
+  border-color: #C69F32;
+  : 0 0 0 3px rgba(198, 159, 50, 0.2);
+}
+
+.phoneSearchBar .searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+}
+
+.phoneSearchBar .clearIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+  cursor: pointer;
+}
+
+.phoneListContainer {
+  background-color: white;
+  border-radius: 0.5rem;
+  : 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.phoneTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.phoneTable tr {
+  border-bottom: 0.5px solid #000000;
+}
+
+.phoneTable tr:last-child {
+  border-bottom: none;
+}
+
+.phoneTable td {
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+}
+
+.phoneNumberCell {
+  font-weight: 600;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.priceCell {
+  font-weight: 600;
+  color: #C69F32;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.actionCell {
+  text-align: right;
+}
+
+.contactButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #425C5B;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contactButton:hover {
+  background-color: #364a49;
+}
+
+.highlight {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 2px 0;
+  border-radius: 3px;
+}
+
+.loadingState,
+.noListingsMessage {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 20px;
+}

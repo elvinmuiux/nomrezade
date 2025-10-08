@@ -1,0 +1,79 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-white);
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 250px; /* Width of sidebar */
+  background-color: var(--color-secondary);
+  min-height: 100vh;
+  position: relative;
+}
+
+.contentWrapper {
+  padding: 1rem;
+  background-color: var(--color-white);
+  min-height: calc(100vh - 2rem);
+  border-radius: 12px;
+  margin: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  
+  gap: 1rem;
+  /* Guards to keep children within MainLayout */
+  min-width: 0;
+  overflow: hidden;
+}
+
+.searchFilter {
+  margin-bottom: 0.5rem;
+}
+
+/* Tablet: 581px - 1325px (Sidebar: 80px) */
+@media (max-width: 1325px) and (min-width: 581px) {
+  .mainContent {
+    margin-left: 55px; /* Collapsed sidebar width */
+    transition: margin-left 0.3s ease;
+  }
+  
+  .contentWrapper {
+    margin: clamp(0.8rem, 2vw, 1rem);
+    border-radius: clamp(8px, 1.5vw, 12px);
+    gap: clamp(0.8rem, 1.5vw, 1rem);
+  }
+}
+
+/* Mobile: ≤580px (Sidebar: 100% width, 60px height) */
+@media (max-width: 580px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .mainContent {
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 60px; /* AppBar height to prevent content hiding */
+  }
+
+  .contentWrapper {
+    margin: clamp(0.4rem, 2vw, 0.6rem);
+    border-radius: clamp(6px, 2vw, 8px);
+    min-height: calc(100vh - 120px);
+    gap: clamp(0.6rem, 2vw, 1rem);
+    padding: 0.5rem;
+  }
+}
+
+/* Large Desktop: ≥1200px (Sidebar: 280px) */
+@media (min-width: 1200px) {
+  .contentWrapper {
+    margin: clamp(1rem, 1.5vw, 1.5rem);
+    border-radius: clamp(12px, 1vw, 16px);
+    gap: clamp(1rem, 1.5vw, 1.2rem);
+  }
+}
+
+

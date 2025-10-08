@@ -1,0 +1,121 @@
+.loginContainer {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+  .loginContainer {
+    height: 85vh;
+  }
+}
+
+.loginCard {
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 400px;
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.loginHeader h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 0.5rem;
+}
+
+.loginHeader p {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+}
+
+.passwordInput {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.passwordInput:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.emailInput {
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.loginButton {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.loginButton:hover {
+  transform: translateY(-1px);
+  background: var(--color-accent);
+}
+
+.errorMessage {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #dc2626;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid #fecaca;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .loginCard {
+    padding: 1.5rem;
+  }
+}
+

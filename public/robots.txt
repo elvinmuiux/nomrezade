@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block admin panel
+Disallow: /src/
+Disallow: /api/debug/
+
+# Block development files
+Disallow: /_next/
+
+Sitemap: https://nomremzade.az/sitemap.xml

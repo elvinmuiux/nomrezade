@@ -1,0 +1,344 @@
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: modalOverlayFadeIn 0.2s ease-out;
+}
+
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-primary-overlay);
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.modalTitleSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: 12px;
+  color: var(--color-white);
+}
+
+.modalHeader h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(148, 163, 184, 0.1);
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  transform: scale(1.05);
+}
+
+.modalForm {
+  padding: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  letter-spacing: -0.025em;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-black);
+  background: var(--color-white);
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  transform: translateY(-1px);
+}
+
+.formInput::placeholder {
+  color: var(--color-gray);
+  font-weight: 400;
+}
+
+.inputDisabled {
+  background: var(--color-white);
+  color: var(--color-black);
+  cursor: not-allowed;
+}
+
+.inputDisabled:focus {
+  border-color: #e2e8f0;
+  transform: none;
+}
+
+.textareaInput {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Prefix Selection Buttons */
+.prefixButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  gap: 0.25rem;
+}
+
+.prefixButton {
+  padding: 0.5rem 0.25rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.prefixButton:hover {
+  border-color: var(--color-border);
+  color: var(--color-white);
+  background: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.prefixButtonActive {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.prefixButtonActive:hover {
+  transform: translateY(-1px);
+}
+
+.typeButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.25rem;
+}
+
+.typeButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.typeButton:hover {
+  border-color: var(--color-border);
+  background: var(--color-blue);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.typeButtonActive {
+  background: var(--color-blue);
+  border-color: var(--color-border);
+  color: var(--color-white);
+}
+
+.typeButtonActive:hover {
+  transform: translateY(-1px);
+}
+
+.errorMessage {
+  background: var(--color-red);
+  color: var(--color-white);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid var(--color-border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.cancelButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  border-color: var(--color-red);
+  color: var(--color-red);
+  background: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.submitButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--color-blue);
+  color: var(--color-white);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .modalActions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    margin: 0.5rem;
+    max-width: calc(100vw - 1rem);
+    border-radius: 1rem;
+  }
+  
+  .modalHeader {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem 1rem 0 0;
+  }
+  
+  .modalForm {
+    padding: 1.5rem;
+  }
+  
+  .modalActions {
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 0 1rem 1rem;
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .submitButton {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+  
+  .prefixButtons,
+  .typeButtons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

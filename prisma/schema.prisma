@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// USER MODELS
+// ==========================================
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  phone     String
+  password  String
+  isPremium Boolean  @default(true)
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  phoneNumbers PhoneNumber[]
+
+  @@map("users")
+}
+
+// ==========================================
+// PHONE NUMBER MODELS
+// ==========================================
+
+model PhoneNumber {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  phoneNumber  String   @unique
+  price        Int      // Price in qepik (1 AZN = 100 qepik)
+  contactPhone String
+  description  String?
+  type         AdType
+  operator     OperatorCode
+  prefix       String
+  status       PhoneStatus @default(ACTIVE)
+  isVip        Boolean  @default(false)
+  isFeatured   Boolean  @default(false)
+  isSeller     Boolean  @default(false)
+  
+  // Seller information
+  sellerId     String?  @db.ObjectId
+  seller       User?    @relation(fields: [sellerId], references: [id])
+  
+  // Timestamps
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiresAt    DateTime
+  
+  // SEO and metadata
+  viewCount    Int      @default(0)
+  favoriteCount Int     @default(0)
+  tags         String[]
+  
+  // Location (optional)
+  location     Location?
+  
+  @@map("phone_numbers")
+}
+
+model Location {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  city     String?
+  region   String?
+  phoneId  String @unique @db.ObjectId
+  phone    PhoneNumber @relation(fields: [phoneId], references: [id], onDelete: Cascade)
+  
+  @@map("locations")
+}
+
+// ==========================================
+// STATISTICS MODELS
+// ==========================================
+
+model Statistics {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  totalVisitors Int      @default(0)
+  todayVisitors Int      @default(0)
+  totalSold     Int      @default(0)
+  totalListings Int      @default(0)
+  lastUpdated   DateTime @default(now())
+  
+  @@map("statistics")
+}
+
+model VisitorLog {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  ip        String?
+  userAgent String?
+  referer   String?
+  visitedAt DateTime @default(now())
+  
+  @@map("visitor_logs")
+}
+
+// ==========================================
+// FEEDBACK MODELS
+// ==========================================
+
+model Feedback {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String
+  phone        String
+  rating       Int         // 1-5 rating
+  feedbackType FeedbackType
+  subject      String
+  message      String
+  date         DateTime    @default(now())
+  timestamp    Int         @default(0)
+  
+  @@map("feedback")
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum AdType {
+  STANDARD
+  PREMIUM
+  GOLD
+}
+
+enum OperatorCode {
+  AZERCELL
+  BAKCELL
+  NAXTEL
+  NAR_MOBILE
+}
+
+enum PhoneStatus {
+  ACTIVE
+  SOLD
+  EXPIRED
+  DRAFT
+}
+
+enum FeedbackType {
+  GENERAL
+  COMPLAINT
+  SUGGESTION
+  BUG_REPORT
+}

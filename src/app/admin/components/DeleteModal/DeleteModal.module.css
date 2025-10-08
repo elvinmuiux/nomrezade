@@ -1,0 +1,233 @@
+/* Delete Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: modalOverlayFadeIn 0.2s ease-out;
+}
+
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-red);
+  border-radius: 1rem 1rem 0 0;
+}
+
+.modalTitleSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: var(--color-white);
+}
+
+.modalHeader h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.closeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modalContent {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.warningIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: var(--color-red);
+}
+
+.warningText h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-black);
+  margin: 0 0 1rem 0;
+}
+
+.warningText p {
+  font-size: 0.875rem;
+  color: var(--color-black);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.warningText p strong {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.warningNote {
+  font-size: 0.75rem !important;
+  color: #6b7280 !important;
+  font-style: italic;
+  margin-bottom: 0 !important;
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: 0 0 1rem 1rem;
+}
+
+.cancelButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  border-color: #6b7280;
+  background: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--color-red);
+  color: var(--color-white);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.deleteButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.deleteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .modal {
+    margin: 0.5rem;
+    max-width: calc(100vw - 1rem);
+    border-radius: 12px;
+  }
+  
+  .modalHeader {
+    padding: 0.75rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+  
+  .modalContent {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .modalActions {
+    padding: 0.75rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .deleteButton {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+}
