@@ -100,7 +100,7 @@ export function getApiConfig() {
   return {
     ...API_CONFIG,
     baseUrl: isDev
-      ? "https://eminnomrezades.vercel.app"
+      ? "https://nomrezade.vercel.app"
       : process.env.NEXT_PUBLIC_SITE_URL || "",
     enableLogging: isDev,
     enableDebug: isDev,
