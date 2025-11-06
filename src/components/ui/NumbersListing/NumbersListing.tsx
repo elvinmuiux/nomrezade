@@ -510,7 +510,7 @@ const MobileLayout: React.FC<{
                 </div>
                 <div className={styles.mobileActions}>
                   <button className={styles.mobileActionButton} onClick={() => onWhatsAppContact(ad.phoneNumber, ad.contactPhone || "0504444422")}>
-                   ç <MessageCircle size={16} />
+                    <MessageCircle size={16} />
                   </button>
                   <button className={styles.mobileOrderButton} onClick={() => onOrderNumber(ad.phoneNumber, ad.contactPhone || '050-444-44-22')}>
                     Sifariş
