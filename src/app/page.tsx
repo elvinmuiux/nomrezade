@@ -1,36 +1,17 @@
-import NumbersPageTemplate from '@/components/ui/NumbersListing';
 import { DataProvider } from '@/components/common/DataProvider';
 import { SearchFilterProvider } from '@/shared/contexts/SearchFilterContext';
-import SearchAndFilter from '@/components/ui/SearchAndFilter/SearchAndFilter';
-import PremiumElanlar from '@/components/ui/PremiumElanlar';
-import GoldElanlar from '@/components/ui/GoldElanlar';
+import HomePageInnerClient from './HomePageInnerClient';
 
 function HomePage() {
   return (
     <DataProvider>
       <SearchFilterProvider>
-        {/* Search and Filter Section */}
-        <SearchAndFilter
-          showTypeFilter={true}
-          showPrefixFilter={true}
-        />
-
-        {/* Gold Elanlar Section */}
-        <GoldElanlar 
-          showViewAll={true}
-        />
-        
-        {/* Premium Elanlar Section */}
-        <PremiumElanlar 
-          showViewAll={true}
-        />
-        
-        <NumbersPageTemplate
-          pageTitle="Bütün Nömrələr"
-        />
+        <HomePageInnerClient />
       </SearchFilterProvider>
     </DataProvider>
   );
 }
+// Home page content is rendered inside a client component (HomePageInnerClient)
+// to safely use client-only hooks like `useSearchFilter`.
 
 export default HomePage;

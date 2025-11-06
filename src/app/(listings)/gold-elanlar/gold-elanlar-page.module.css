@@ -1,0 +1,3 @@
+.backWrapper { margin-bottom: 12px; }
+.backButton { padding: 6px 10px; border-radius: 6px; border: 1px solid #ddd; background: white; cursor: pointer; }
+.backButton:hover { background: #f7f7f7; }

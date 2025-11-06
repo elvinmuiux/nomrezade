@@ -1,11 +1,13 @@
-import GoldElanlar from '@/components/ui/GoldElanlar';
+import { DataProvider } from '@/components/common/DataProvider';
+import { SearchFilterProvider } from '@/shared/contexts/SearchFilterContext';
+import GoldElanlarPageClient from './GoldElanlarPageClient';
 
 export default function GoldElanlarPage() {
   return (
-    <div>
-      <GoldElanlar 
-        showViewAll={false}
-      />
-    </div>
+    <DataProvider>
+      <SearchFilterProvider>
+        <GoldElanlarPageClient />
+      </SearchFilterProvider>
+    </DataProvider>
   );
 }

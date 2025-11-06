@@ -76,19 +76,22 @@ export function usePhoneNumberFilter(
       // Search filter - Support prefixless and partial search (admin panel compatibility)
       if (searchTerm) {
         const cleanSearchTerm = searchTerm.replace(/[^0-9]/g, '');
-        if (cleanSearchTerm && cleanSearchTerm.length >= 2) {
-          // Full phone search (with prefix)
-          const fullMatch = phoneDigits.includes(cleanSearchTerm);
-          
-          // Prefixless search (without first 3 digits)
+        if (!cleanSearchTerm) return false;
+
+        // If the user typed a long/complete number (7 or more digits),
+        // require an exact match to avoid surfacing unrelated results from other pages.
+        if (cleanSearchTerm.length >= 7) {
           const phoneWithoutPrefix = phoneDigits.slice(3);
+          const exactMatch = phoneDigits === cleanSearchTerm || phoneWithoutPrefix === cleanSearchTerm;
+          if (!exactMatch) return false;
+        } else if (cleanSearchTerm.length >= 2) {
+          // For short searches allow substring match (still scoped by operator/prefix)
+          const phoneWithoutPrefix = phoneDigits.slice(3);
+          const fullMatch = phoneDigits.includes(cleanSearchTerm);
           const prefixlessMatch = phoneWithoutPrefix.includes(cleanSearchTerm);
-          
-          if (!fullMatch && !prefixlessMatch) {
-            return false;
-          }
-        } else if (cleanSearchTerm && cleanSearchTerm.length < 2) {
-          // For very short searches, don't show results
+          if (!fullMatch && !prefixlessMatch) return false;
+        } else {
+          // For single-digit searches, don't show results
           return false;
         }
       }

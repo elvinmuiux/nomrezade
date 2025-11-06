@@ -44,8 +44,11 @@ const NumbersList = React.memo<NumbersListProps>(({ filteredNumbers, loading, se
   };
 
   // Pagination state
+  // Set itemsPerPage to a very large number so the admin list will render all
+  // added phone numbers (effectively unlimited) while preserving existing
+  // pagination logic and layout (pagination controls hide when not needed).
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = Number.MAX_SAFE_INTEGER;
 
   const [deleteModal, setDeleteModal] = useState<{
     isOpen: boolean;

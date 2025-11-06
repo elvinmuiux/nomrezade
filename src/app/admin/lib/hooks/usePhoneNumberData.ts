@@ -14,8 +14,11 @@ export const usePhoneNumberData = () => {
     setError('');
     
     try {
-      // Use centralized API service
-      const result = await apiService.getPhoneNumbers();
+  // Use centralized API service
+  // Request a very large limit so the admin panel receives all phone numbers
+  // (Prisma 'take' will honor this value). This avoids changing server
+  // defaults while ensuring the admin sees every added number.
+  const result = await apiService.getPhoneNumbers({ limit: 1000000 });
       
       if (result.success && result.data) {
         // Convert API data to admin format

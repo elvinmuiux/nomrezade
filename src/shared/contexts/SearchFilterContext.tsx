@@ -10,6 +10,7 @@ interface SearchFilterContextType {
   selectedType: string;
   setSelectedType: (type: string) => void;
   resetFilters: () => void;
+  hasActiveSearch: boolean;
 }
 
 const SearchFilterContext = createContext<SearchFilterContextType | undefined>(undefined);
@@ -29,6 +30,10 @@ export function SearchFilterProvider({ children }: SearchFilterProviderProps) {
     setSelectedType('');
   };
 
+  // Consider a search active when user has entered at least 2 digits (avoid single-digit noise)
+  const cleanedSearch = searchTerm.replace(/[^0-9]/g, '');
+  const hasActiveSearch = cleanedSearch.length >= 2;
+
   const value: SearchFilterContextType = {
     searchTerm,
     setSearchTerm,
@@ -37,6 +42,7 @@ export function SearchFilterProvider({ children }: SearchFilterProviderProps) {
     selectedType,
     setSelectedType,
     resetFilters,
+    hasActiveSearch,
   };
 
   return (

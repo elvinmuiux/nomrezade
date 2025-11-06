@@ -39,10 +39,11 @@ export function DataProvider({ children }: DataProviderProps) {
     setLoading(true);
     setError(null);
     try {
-      // Use centralized API service
+      // Use centralized API service - request a very high limit so public pages
+      // receive all active phone numbers (matches admin behavior).
       const result = await apiService.getPhoneNumbers({ 
         status: 'active', 
-        limit: 200 
+        limit: 1000000 // Effectively unlimited for client-side usage
       });
       
       if (result.success && result.data) {

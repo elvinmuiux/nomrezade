@@ -12,6 +12,7 @@ import { useDataProvider, type PhoneAd } from '@/components/common/DataProvider'
 import { usePhoneNumberFilter } from '@/shared/hooks/usePhoneNumberFilter';
 import { useSearchFilter } from '@/shared/contexts/SearchFilterContext';
 import { formatPriceSimple } from '@/shared/utils/format';
+import { highlightNumber } from '@/shared/utils/highlightNumber';
 import styles from './NumbersListing.module.css';
 import Image from 'next/image';
 
@@ -26,6 +27,8 @@ export interface NumbersListingProps {
   selectedPrefix?: string;
   setSelectedPrefix?: (prefix: string) => void;
   filteredNumbers?: PhoneAd[];
+  // Optional node to render on the right side of the header (e.g., back button)
+  headerRight?: React.ReactNode;
 }
 
 interface ModalState {
@@ -297,6 +300,7 @@ const DesktopLayout: React.FC<{
   onOrderNumber: (phoneNumber: string, contactPhone: string) => void;
   onModalCancel: () => void;
   onModalConfirm: () => void;
+  searchTerm: string;
 }> = ({
   numbers,
   loading,
@@ -305,6 +309,7 @@ const DesktopLayout: React.FC<{
   onOrderNumber,
   onModalCancel,
   onModalConfirm,
+  searchTerm,
 }) => {
   if (loading) {
     return (
@@ -350,7 +355,16 @@ const DesktopLayout: React.FC<{
                 width={30}
                 height={20}
               />
-              <span className={styles.phoneNumber}>{ad.phoneNumber}</span>
+              <span className={styles.phoneNumber}>
+                {highlightNumber(ad.phoneNumber, searchTerm).parts.map((part, index) => (
+                  <span
+                    key={index}
+                    className={part.isHighlighted ? styles.phoneNumberHighlight : undefined}
+                  >
+                    {part.text}
+                  </span>
+                ))}
+              </span>
             </div>
             <div className={styles.cellProvider}>
               <span className={styles.provider}>{ad.provider || 'Unknown'}</span>
@@ -408,6 +422,7 @@ const MobileLayout: React.FC<{
   onOrderNumber: (phoneNumber: string, contactPhone: string) => void;
   onModalCancel: () => void;
   onModalConfirm: () => void;
+  searchTerm: string;
 }> = ({
   numbers,
   loading,
@@ -416,6 +431,7 @@ const MobileLayout: React.FC<{
   onOrderNumber,
   onModalCancel,
   onModalConfirm,
+  searchTerm,
 }) => {
   if (loading) {
     return (
@@ -464,7 +480,16 @@ const MobileLayout: React.FC<{
                     width={20}
                     height={15}
                   />
-                  <span className={styles.mobilePhoneNumber}>{ad.phoneNumber}</span>
+                  <span className={styles.mobilePhoneNumber}>
+                {highlightNumber(ad.phoneNumber, searchTerm).parts.map((part, index) => (
+                  <span
+                    key={index}
+                    className={part.isHighlighted ? styles.phoneNumberHighlight : undefined}
+                  >
+                    {part.text}
+                  </span>
+                ))}
+              </span>
                 </div>
                 <div className={styles.mobileCenterSection}>
                   <span className={styles.mobileProvider}>{ad.provider || 'Unknown'}</span>
@@ -485,7 +510,7 @@ const MobileLayout: React.FC<{
                 </div>
                 <div className={styles.mobileActions}>
                   <button className={styles.mobileActionButton} onClick={() => onWhatsAppContact(ad.phoneNumber, ad.contactPhone || "0504444422")}>
-                    <MessageCircle size={16} />
+                   ç <MessageCircle size={16} />
                   </button>
                   <button className={styles.mobileOrderButton} onClick={() => onOrderNumber(ad.phoneNumber, ad.contactPhone || '050-444-44-22')}>
                     Sifariş
@@ -518,6 +543,7 @@ export default function NumbersListing({
   selectedPrefix: propSelectedPrefix,
   setSelectedPrefix: propSetSelectedPrefix,
   filteredNumbers: propFilteredNumbers,
+  headerRight,
 }: NumbersListingProps) {
   const { phoneNumbers, loading: isLoading } = useDataProvider();
   const { incrementSold } = useStatistics();
@@ -661,6 +687,12 @@ export default function NumbersListing({
             )}
           </div>
           <h1 className={styles.title}>{pageTitle}</h1>
+
+          {/* Optional actions rendered on the right side of the header */}
+          <div className={styles.headerActions}>
+            {/* headerRight is optional and may be undefined */}
+            {headerRight}
+          </div>
         </div>
 
       {/* Content Section */}
@@ -674,6 +706,7 @@ export default function NumbersListing({
           onOrderNumber={handleOrderNumber}
           onModalCancel={handleModalCancel}
           onModalConfirm={handleModalConfirm}
+          searchTerm={finalSearchTerm}
         />
 
         {/* Mobile Layout */}
@@ -685,6 +718,7 @@ export default function NumbersListing({
           onOrderNumber={handleOrderNumber}
           onModalCancel={handleModalCancel}
           onModalConfirm={handleModalConfirm}
+          searchTerm={finalSearchTerm}
         />
 
         {/* Empty State */}

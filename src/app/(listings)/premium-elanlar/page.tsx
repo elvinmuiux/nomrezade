@@ -1,13 +1,15 @@
-import PremiumElanlar from '@/components/ui/PremiumElanlar';
 import React from 'react';
+import { DataProvider } from '@/components/common/DataProvider';
+import { SearchFilterProvider } from '@/shared/contexts/SearchFilterContext';
+import PremiumElanlarPageClient from './PremiumElanlarPageClient';
 
 const PremiumPage = () => {
   return (
-    <div>
-      <PremiumElanlar 
-        showViewAll={false}
-      />
-    </div>
+    <DataProvider>
+      <SearchFilterProvider>
+        <PremiumElanlarPageClient />
+      </SearchFilterProvider>
+    </DataProvider>
   );
 };
 
