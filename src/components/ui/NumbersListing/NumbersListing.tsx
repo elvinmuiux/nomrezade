@@ -613,11 +613,19 @@ export default function NumbersListing({
     incrementSold();
     
     // Clean and format contact phone for calling
-    const cleanContactPhone = selectedContactPhone.replace(/[^0-9]/g, '');
-    
-    // Close modal and make call
+    const digitsOnly = selectedContactPhone.replace(/[^0-9]/g, '');
+
+    // Normalize: remove leading 0 or existing country code (994) so we don't duplicate
+    let normalized = digitsOnly;
+    if (normalized.startsWith('0')) {
+      normalized = normalized.slice(1);
+    } else if (normalized.startsWith('994')) {
+      normalized = normalized.slice(3);
+    }
+
+    // Close modal and make call using +994<rest>
     setIsModalOpen(false);
-    window.location.href = `tel:+994${cleanContactPhone}`;
+    window.location.href = `tel:+994${normalized}`;
   };
 
   const handleModalCancel = () => {
@@ -626,7 +634,16 @@ export default function NumbersListing({
 
   const handleWhatsAppContact = (phoneNumber: string, contactPhone: string) => {
     const message = encodeURIComponent(`Salam! ${phoneNumber} nömrəsi barədə məlumat almaq istərdim.`);
-    window.open(`https://wa.me/994${contactPhone.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
+
+    // Sanitize contact phone similar to call behaviour
+    let waDigits = contactPhone.replace(/[^0-9]/g, '');
+    if (waDigits.startsWith('0')) {
+      waDigits = waDigits.slice(1);
+    } else if (waDigits.startsWith('994')) {
+      waDigits = waDigits.slice(3);
+    }
+
+    window.open(`https://wa.me/994${waDigits}?text=${message}`, '_blank');
   };
 
   // Clear filters handler
