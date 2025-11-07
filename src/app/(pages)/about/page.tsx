@@ -1,13 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageTemplate from '@/components/layout/PageTemplate/PageTemplate';
 import { useStatistics } from '@/shared/hooks/useStatistics';
 import styles from './page.module.css';
 
 export default function AboutPage() {
-  const { stats, loading } = useStatistics();
-  const [isUpdating] = useState(false);
+  const { stats, loading, incrementUsers } = useStatistics();
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // Increment active users count when page loads
+  useEffect(() => {
+    // Check if we've already incremented today (per user)
+    const lastIncrement = localStorage.getItem('about_page_last_increment');
+    const today = new Date().toDateString();
+    
+    if (lastIncrement !== today && !loading) {
+      // Wait a bit to ensure stats are loaded, then increment
+      const timer = setTimeout(() => {
+        setIsUpdating(true);
+        incrementUsers().then(() => {
+          localStorage.setItem('about_page_last_increment', today);
+          // Stop animation after 1 second
+          setTimeout(() => setIsUpdating(false), 1000);
+        });
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading, incrementUsers]);
 
   // Format numbers for display
   const formatNumber = (num: number): string => {

@@ -13,10 +13,10 @@ interface UseStatisticsReturn {
 }
 
 const DEFAULT_STATS: Statistics = {
-  activeUsers: 1250,
-  soldNumbers: 847,
+  activeUsers: 0,
+  soldNumbers: 0,
   totalListings: 0,
-  totalVisitors: 1250,
+  totalVisitors: 0,
   lastUpdated: new Date().toISOString()
 };
 
@@ -57,6 +57,13 @@ export function useStatistics(): UseStatisticsReturn {
   // Increment active users
   const incrementUsers = useCallback(async () => {
     try {
+      // Optimistic update - immediately reflect in UI
+      setStats(prev => ({
+        ...prev,
+        activeUsers: prev.activeUsers + 1,
+        totalVisitors: prev.totalVisitors + 1
+      }));
+
       const result = await apiService.updateStatistics('increment_users');
       
       if (result.success && result.data) {
@@ -64,12 +71,20 @@ export function useStatistics(): UseStatisticsReturn {
       }
     } catch (err) {
       console.error('Error incrementing users:', err);
+      // Revert on error
+      fetchStats();
     }
-  }, []);
+  }, [fetchStats]);
 
   // Increment sold numbers
   const incrementSold = useCallback(async () => {
     try {
+      // Optimistic update - immediately reflect in UI
+      setStats(prev => ({
+        ...prev,
+        soldNumbers: prev.soldNumbers + 1
+      }));
+
       const result = await apiService.updateStatistics('increment_sold');
       
       if (result.success && result.data) {
@@ -77,8 +92,10 @@ export function useStatistics(): UseStatisticsReturn {
       }
     } catch (err) {
       console.error('Error incrementing sold numbers:', err);
+      // Revert on error
+      fetchStats();
     }
-  }, []);
+  }, [fetchStats]);
 
   // Refresh statistics
   const refreshStats = useCallback(async () => {
@@ -90,22 +107,8 @@ export function useStatistics(): UseStatisticsReturn {
     fetchStats();
   }, [fetchStats]);
 
-  // Auto-increment users on first visit (with rate limiting)
-  useEffect(() => {
-    const hasIncrementedToday = localStorage.getItem('stats_incremented_today');
-    const today = new Date().toDateString();
-
-    if (hasIncrementedToday !== today) {
-      // Increment users after a short delay to ensure page is loaded
-      const timer = setTimeout(() => {
-        incrementUsers().then(() => {
-          localStorage.setItem('stats_incremented_today', today);
-        });
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [incrementUsers]);
+  // NOTE: Auto-increment has been moved to individual pages
+  // This allows better control over when to increment (e.g., only on About page)
 
   return {
     stats,
