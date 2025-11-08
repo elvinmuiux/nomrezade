@@ -19,7 +19,8 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
     contactPhone: '',
     type: 'standard',
     description: '',
-    isSeller: false
+    isSeller: false,
+    phoneNumbers: [] // Add support for multiple numbers
   });
 
   // Prefix selection state
@@ -32,7 +33,8 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
       contactPhone: '',
       type: 'standard',
       description: '',
-      isSeller: false
+      isSeller: false,
+      phoneNumbers: []
     });
     setSelectedFormPrefix('');
     setShowAddModal(true);
@@ -99,7 +101,8 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
       contactPhone: '',
       type: 'standard',
       description: '',
-      isSeller: false
+      isSeller: false,
+      phoneNumbers: []
     });
     setSelectedFormPrefix('');
     setError('');
@@ -110,17 +113,24 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
     setLoading(true);
 
     if (showAddModal) {
+      // Check if we have multiple phone numbers to add
+      const phoneNumbersToAdd = formData.phoneNumbers && formData.phoneNumbers.length > 0 
+        ? formData.phoneNumbers 
+        : formData.phoneNumber.trim() 
+          ? [`(${selectedFormPrefix})-${formData.phoneNumber}`]
+          : [];
+
+      if (phoneNumbersToAdd.length === 0) {
+        setError('Ən azı bir nömrə daxil edin');
+        setLoading(false);
+        return;
+      }
+
       // Comprehensive form validation for add
       const errors: string[] = [];
       
       if (!selectedFormPrefix) {
         errors.push('Operator seçin');
-      }
-      
-      if (!formData.phoneNumber.trim()) {
-        errors.push('Telefon nömrəsi daxil edin');
-      } else if (!/^\d{3}-\d{2}-\d{2}$/.test(formData.phoneNumber.trim())) {
-        errors.push('Telefon nömrəsi formatı: 255-33-22');
       }
       
       if (!formData.price.trim()) {
@@ -139,50 +149,99 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
         return;
       }
 
-      // Create formatted phone number: (050)-255-33-22
-      const fullPhoneNumber = `(${selectedFormPrefix})-${formData.phoneNumber}`;
-      
-      // Debug log the data being sent
-      const requestData = {
-        phoneNumber: fullPhoneNumber,
-        price: parseInt(formData.price),
-        contactPhone: formData.contactPhone,
-        type: formData.type,
-        description: formData.description || '',
-        isSeller: formData.isSeller || false
-      };
-      
-      console.log('Sending request data:', requestData);
-      
-      // Add new number via centralized API service
-      const result = await apiService.createPhoneNumber(requestData);
-      console.log('API Response:', result);
-      
-      if (result.success) {
-        // Clear form data
-        setFormData({
-          phoneNumber: '',
-          price: '',
-          contactPhone: '',
-          type: 'standard',
-          description: '',
-          isSeller: false
-        });
-        setSelectedFormPrefix('');
+      // If multiple numbers, create all of them
+      if (phoneNumbersToAdd.length > 1) {
+        let successCount = 0;
+        let failedCount = 0;
         
-        // Success feedback to user
-        showToast?.showSuccess('Nömrə əlavə edildi', 'Yeni nömrə uğurla əlavə edildi!');
+        for (const phoneNumber of phoneNumbersToAdd) {
+          const requestData = {
+            phoneNumber: phoneNumber,
+            price: parseInt(formData.price),
+            contactPhone: formData.contactPhone,
+            type: formData.type,
+            description: formData.description || '',
+            isSeller: formData.isSeller || false
+          };
+          
+          console.log('Sending request data:', requestData);
+          
+          const result = await apiService.createPhoneNumber(requestData);
+          
+          if (result.success) {
+            successCount++;
+          } else {
+            failedCount++;
+            console.error('Failed to add number:', phoneNumber, result.error);
+          }
+        }
         
-        // Wait a moment for server-side updates to propagate
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Reload phone numbers to show the new addition
-        await loadPhoneNumbers();
-        setShowAddModal(false);
-        setError('');
+        if (successCount > 0) {
+          showToast?.showSuccess(
+            `${successCount} nömrə əlavə edildi`, 
+            failedCount > 0 ? `${failedCount} nömrə əlavə edilə bilmədi` : undefined
+          );
+          
+          // Clear form data
+          setFormData({
+            phoneNumber: '',
+            price: '',
+            contactPhone: '',
+            type: 'standard',
+            description: '',
+            isSeller: false,
+            phoneNumbers: []
+          });
+          setSelectedFormPrefix('');
+          
+          // Wait and reload
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await loadPhoneNumbers();
+          setShowAddModal(false);
+          setError('');
+        } else {
+          setError('Nömrələr əlavə edilərkən xəta baş verdi');
+        }
       } else {
-        console.error('API Error:', result.error);
-        setError(result.error || 'Nömrə əlavə edilərkən xəta baş verdi');
+        // Single number - original logic
+        const fullPhoneNumber = phoneNumbersToAdd[0];
+        
+        const requestData = {
+          phoneNumber: fullPhoneNumber,
+          price: parseInt(formData.price),
+          contactPhone: formData.contactPhone,
+          type: formData.type,
+          description: formData.description || '',
+          isSeller: formData.isSeller || false
+        };
+        
+        console.log('Sending request data:', requestData);
+        
+        const result = await apiService.createPhoneNumber(requestData);
+        console.log('API Response:', result);
+        
+        if (result.success) {
+          setFormData({
+            phoneNumber: '',
+            price: '',
+            contactPhone: '',
+            type: 'standard',
+            description: '',
+            isSeller: false,
+            phoneNumbers: []
+          });
+          setSelectedFormPrefix('');
+          
+          showToast?.showSuccess('Nömrə əlavə edildi', 'Yeni nömrə uğurla əlavə edildi!');
+          
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await loadPhoneNumbers();
+          setShowAddModal(false);
+          setError('');
+        } else {
+          console.error('API Error:', result.error);
+          setError(result.error || 'Nömrə əlavə edilərkən xəta baş verdi');
+        }
       }
     } else if (showEditModal && editingNumber) {
       // Comprehensive form validation for edit
@@ -235,7 +294,8 @@ export const useModalAndForm = (loadPhoneNumbers: () => Promise<void>, setError:
           contactPhone: '',
           type: 'standard',
           description: '',
-          isSeller: false
+          isSeller: false,
+          phoneNumbers: []
         });
         setSelectedFormPrefix('');
         

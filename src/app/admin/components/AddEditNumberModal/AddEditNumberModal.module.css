@@ -302,6 +302,97 @@
   transform: translateY(0);
 }
 
+/* Add Phone Button */
+.addPhoneButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-blue);
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.addPhoneButton:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Phone Numbers List */
+.phoneNumbersList {
+  margin-top: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.phoneNumbersListHeader {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary-overlay);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.phoneNumbersListItems {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.phoneNumberItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.2s ease;
+}
+
+.phoneNumberItem:last-child {
+  border-bottom: none;
+}
+
+.phoneNumberItem:hover {
+  background: var(--color-primary-overlay);
+}
+
+.phoneNumberText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-black);
+  font-family: monospace;
+}
+
+.removePhoneButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(239, 68, 68, 0.1);
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.removePhoneButton:hover {
+  background: #ef4444;
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .modalActions {

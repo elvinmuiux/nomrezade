@@ -509,12 +509,12 @@ const MobileLayout: React.FC<{
                   </span>
                 </div>
                 <div className={styles.mobileActions}>
-                  <div className={styles.mobileActionButton} onClick={() => onWhatsAppContact(ad.phoneNumber, ad.contactPhone || "0504444422")}>
-                    <MessageCircle size={16} />
-                  </div>
-                  <div className={styles.mobileOrderButton} onClick={() => onOrderNumber(ad.phoneNumber, ad.contactPhone || '050-444-44-22')}>
-                    Sifariş
-                  </div>
+                  <button className={styles.mobileActionButton} onClick={() => onWhatsAppContact(ad.phoneNumber, ad.contactPhone || "0504444422")}>
+                  x<MessageCircle size={16} />
+                  </button>
+                  <button className={styles.mobileOrderButton} onClick={() => onOrderNumber(ad.phoneNumber, ad.contactPhone || '050-444-44-22')}>
+                    Zəng et
+                  </button>
                 </div>
               </div>
             </div>
@@ -613,19 +613,11 @@ export default function NumbersListing({
     incrementSold();
     
     // Clean and format contact phone for calling
-    const digitsOnly = selectedContactPhone.replace(/[^0-9]/g, '');
-
-    // Normalize: remove leading 0 or existing country code (994) so we don't duplicate
-    let normalized = digitsOnly;
-    if (normalized.startsWith('0')) {
-      normalized = normalized.slice(1);
-    } else if (normalized.startsWith('994')) {
-      normalized = normalized.slice(3);
-    }
-
-    // Close modal and make call using +994<rest>
+    const cleanContactPhone = selectedContactPhone.replace(/[^0-9]/g, '');
+    
+    // Close modal and make call
     setIsModalOpen(false);
-    window.location.href = `tel:+994${normalized}`;
+    window.location.href = `tel:+994${cleanContactPhone}`;
   };
 
   const handleModalCancel = () => {
@@ -634,16 +626,7 @@ export default function NumbersListing({
 
   const handleWhatsAppContact = (phoneNumber: string, contactPhone: string) => {
     const message = encodeURIComponent(`Salam! ${phoneNumber} nömrəsi barədə məlumat almaq istərdim.`);
-
-    // Sanitize contact phone similar to call behaviour
-    let waDigits = contactPhone.replace(/[^0-9]/g, '');
-    if (waDigits.startsWith('0')) {
-      waDigits = waDigits.slice(1);
-    } else if (waDigits.startsWith('994')) {
-      waDigits = waDigits.slice(3);
-    }
-
-    window.open(`https://wa.me/994${waDigits}?text=${message}`, '_blank');
+    window.open(`https://wa.me/994${contactPhone.replace(/[^0-9]/g, '')}?text=${message}`, '_blank');
   };
 
   // Clear filters handler

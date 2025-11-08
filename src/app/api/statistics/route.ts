@@ -81,42 +81,20 @@ export async function GET() {
       );
     }
 
-    // Helper function to check if month has changed
-    const isNewMonth = (lastUpdated: Date): boolean => {
-      const now = new Date();
-      return (
-        lastUpdated.getFullYear() !== now.getFullYear() ||
-        lastUpdated.getMonth() !== now.getMonth()
-      );
-    };
-
     // Get or create statistics record
     let stats = await prisma.statistics.findFirst();
     
     if (!stats) {
-      // Create initial statistics record (starting from 0)
+      // Create initial statistics record
       stats = await prisma.statistics.create({
         data: {
-          totalVisitors: 0,
-          todayVisitors: 0,
-          totalSold: 0,
+          totalVisitors: 1250,
+          todayVisitors: 150,
+          totalSold: 847,
           totalListings: 0
         }
       });
-      console.log('📊 Created initial statistics record (starting from 0)');
-    } else if (isNewMonth(stats.lastUpdated)) {
-      // Reset monthly statistics (keep totalListings as it's not monthly)
-      console.log('🔄 New month detected - resetting monthly statistics');
-      stats = await prisma.statistics.update({
-        where: { id: stats.id },
-        data: {
-          totalVisitors: 0,
-          todayVisitors: 0,
-          totalSold: 0,
-          lastUpdated: new Date()
-        }
-      });
-      console.log('✅ Monthly statistics reset');
+      console.log('📊 Created initial statistics record');
     }
 
     // Update total listings count
@@ -154,16 +132,16 @@ export async function GET() {
     console.error('❌ API Error:', error);
     console.error('❌ Error stack:', error instanceof Error ? error.stack : 'No stack trace');
     
-    // Fallback statistics (starting from 0)
+    // Fallback statistics
     return NextResponse.json({
       success: false,
       error: 'Server xətası',
       details: error instanceof Error ? error.message : String(error),
       fallback: {
-        activeUsers: 0,
-        soldNumbers: 0,
+        activeUsers: 150,
+        soldNumbers: 847,
         totalListings: 0,
-        totalVisitors: 0,
+        totalVisitors: 1250,
         lastUpdated: new Date().toISOString()
       }
     }, { status: 500 });
@@ -226,15 +204,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Helper function to check if month has changed
-    const isNewMonth = (lastUpdated: Date): boolean => {
-      const now = new Date();
-      return (
-        lastUpdated.getFullYear() !== now.getFullYear() ||
-        lastUpdated.getMonth() !== now.getMonth()
-      );
-    };
-
     // Get or create statistics record
     let stats = await prisma.statistics.findFirst();
     
@@ -247,20 +216,7 @@ export async function POST(request: NextRequest) {
           totalListings: 0
         }
       });
-      console.log('📊 Created initial statistics record (starting from 0)');
-    } else if (isNewMonth(stats.lastUpdated)) {
-      // Reset monthly statistics
-      console.log('🔄 New month detected in POST - resetting monthly statistics');
-      stats = await prisma.statistics.update({
-        where: { id: stats.id },
-        data: {
-          totalVisitors: 0,
-          todayVisitors: 0,
-          totalSold: 0,
-          lastUpdated: new Date()
-        }
-      });
-      console.log('✅ Monthly statistics reset');
+      console.log('📊 Created initial statistics record');
     }
 
     let updatedStats = stats;
@@ -314,11 +270,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: {
-        activeUsers: updatedStats.todayVisitors,
-        soldNumbers: updatedStats.totalSold,
-        totalListings: updatedStats.totalListings,
-        totalVisitors: updatedStats.totalVisitors,
-        lastUpdated: updatedStats.lastUpdated.toISOString()
+        updated: true,
+        stats: {
+          activeUsers: updatedStats.todayVisitors,
+          soldNumbers: updatedStats.totalSold,
+          totalListings: updatedStats.totalListings,
+          totalVisitors: updatedStats.totalVisitors,
+          lastUpdated: updatedStats.lastUpdated.toISOString()
+        }
       },
       metadata: {
         action,

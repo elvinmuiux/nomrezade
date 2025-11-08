@@ -27,4 +27,5 @@ export interface FormData {
   type: 'standard' | 'gold' | 'premium';
   description: string;
   isSeller: boolean;
+  phoneNumbers?: string[]; // Array for bulk adding
 }

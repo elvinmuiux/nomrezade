@@ -453,10 +453,6 @@
   .mobileList {
     display: flex;
   }
-  /* hide provider/operator name on admin mobile list */
-  .mobileProvider {
-    display: none;
-  }
 }
 
 /* Pagination Styles */

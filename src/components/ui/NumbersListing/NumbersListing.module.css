@@ -608,13 +608,6 @@
   }
 }
 
-/* Hide operator/provider names on phone-sized screens as requested */
-@media (max-width: 768px) {
-  .mobileProvider {
-    display: none;
-  }
-}
-
 .mobileCard {
   background: var(--color-white);
   border: 1px solid var(--color-border);

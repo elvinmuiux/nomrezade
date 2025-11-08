@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { X, Phone, DollarSign, User, Tag, FileText } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, Phone, DollarSign, User, Tag, FileText, Plus } from 'lucide-react';
 import styles from './AddEditNumberModal.module.css';
 
 interface FormData {
@@ -11,6 +11,7 @@ interface FormData {
   type: 'standard' | 'gold' | 'premium';
   description: string;
   isSeller: boolean;
+  phoneNumbers?: string[]; // Array for multiple numbers
 }
 
 interface AddEditNumberModalProps {
@@ -40,6 +41,10 @@ export default function AddEditNumberModal({
   onClose,
   error
 }: AddEditNumberModalProps) {
+  // Local state for multiple phone numbers
+  const [phoneNumbersList, setPhoneNumbersList] = useState<string[]>([]);
+  const [currentPhoneInput, setCurrentPhoneInput] = useState('');
+
   // When opening the "Yeni Elan Əlavə Et" modal, lock the contact phone
   // to the corporate support number and disable editing of the contact
   // phone and description fields per request. We only apply this for
@@ -48,8 +53,11 @@ export default function AddEditNumberModal({
     if (showAddModal) {
       const fixedContact = '050-444-44-22';
       if (formData.contactPhone !== fixedContact) {
-        setFormData({ ...formData, contactPhone: fixedContact });
+        setFormData({ ...formData, contactPhone: fixedContact, phoneNumbers: [] });
       }
+      // Reset the list when opening
+      setPhoneNumbersList([]);
+      setCurrentPhoneInput('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showAddModal]);
@@ -74,6 +82,48 @@ export default function AddEditNumberModal({
     if (value.length <= 8) return `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6)}`;
     return `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6, 8)}-${value.slice(8, 10)}`;
   };
+
+  // Add phone number to the list when Enter is pressed
+  const handleAddPhoneToList = () => {
+    if (!selectedFormPrefix || !currentPhoneInput.trim()) {
+      return;
+    }
+    
+    const formatted = formatListingPhone(currentPhoneInput);
+    if (formatted && /^\d{3}-\d{2}-\d{2}$/.test(formatted)) {
+      const fullNumber = `${selectedFormPrefix}-${formatted}`;
+      if (!phoneNumbersList.includes(fullNumber)) {
+        setPhoneNumbersList([...phoneNumbersList, fullNumber]);
+        setCurrentPhoneInput('');
+      }
+    }
+  };
+
+  // Handle Enter key press
+  const handlePhoneInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddPhoneToList();
+    }
+  };
+
+  // Remove phone number from list
+  const handleRemovePhoneFromList = (index: number) => {
+    setPhoneNumbersList(phoneNumbersList.filter((_, i) => i !== index));
+  };
+
+  // Handle form submission with multiple numbers
+  const handleMultiSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // If we have multiple numbers in the list, update formData with them
+    if (showAddModal && phoneNumbersList.length > 0) {
+      setFormData({ ...formData, phoneNumbers: phoneNumbersList });
+    }
+    
+    onSubmit(e);
+  };
+
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -89,7 +139,7 @@ export default function AddEditNumberModal({
           </button>
         </div>
         
-        <form onSubmit={onSubmit} className={styles.modalForm}>
+        <form onSubmit={handleMultiSubmit} className={styles.modalForm}>
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>
               <Tag size={16} />
@@ -104,6 +154,7 @@ export default function AddEditNumberModal({
                   onClick={() => {
                     setSelectedFormPrefix(prefix);
                     setFormData({...formData, phoneNumber: ''});
+                    setCurrentPhoneInput('');
                   }}
                 >
                   {prefix}
@@ -115,34 +166,78 @@ export default function AddEditNumberModal({
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>
               <Phone size={16} />
-              Nömrə
+              {showAddModal ? 'Nömrələr (Enter ilə əlavə edin)' : 'Nömrə'}
             </label>
             <div className={styles.inputContainer}>
               <input
                 type="text"
-                value={selectedFormPrefix ? `${selectedFormPrefix}-${formData.phoneNumber}` : ''}
+                value={showAddModal 
+                  ? (selectedFormPrefix ? `${selectedFormPrefix}-${currentPhoneInput}` : '')
+                  : (selectedFormPrefix ? `${selectedFormPrefix}-${formData.phoneNumber}` : '')
+                }
                 onChange={(e) => {
                   if (!selectedFormPrefix) return;
                   const fullValue = e.target.value;
+                  let cleanValue = '';
+                  
                   if (fullValue.startsWith(selectedFormPrefix)) {
                     const withoutPrefix = fullValue.substring(selectedFormPrefix.length);
-                    const cleanValue = withoutPrefix.startsWith('-') ? withoutPrefix.substring(1) : withoutPrefix;
-                    const formatted = formatListingPhone(cleanValue);
-                    setFormData({ ...formData, phoneNumber: formatted });
+                    cleanValue = withoutPrefix.startsWith('-') ? withoutPrefix.substring(1) : withoutPrefix;
                   } else {
-                    const value = fullValue.replace(/\D/g, '');
-                    const formatted = formatListingPhone(value);
+                    cleanValue = fullValue.replace(/\D/g, '');
+                  }
+                  
+                  const formatted = formatListingPhone(cleanValue);
+                  
+                  if (showAddModal) {
+                    setCurrentPhoneInput(formatted);
+                  } else {
                     setFormData({ ...formData, phoneNumber: formatted });
                   }
                 }}
+                onKeyDown={showAddModal ? handlePhoneInputKeyDown : undefined}
                 placeholder={selectedFormPrefix ? `${selectedFormPrefix}-267-63-66` : "Əvvəlcə prefiks seçin"}
                 className={`${styles.formInput} ${!selectedFormPrefix ? styles.inputDisabled : ''}`}
                 disabled={!selectedFormPrefix}
                 maxLength={15}
-                required
+                required={!showAddModal || phoneNumbersList.length === 0}
                 minLength={7}
               />
+              {showAddModal && selectedFormPrefix && (
+                <button
+                  type="button"
+                  onClick={handleAddPhoneToList}
+                  className={styles.addPhoneButton}
+                  title="Nömrə əlavə et"
+                >
+                  <Plus size={18} />
+                </button>
+              )}
             </div>
+            
+            {/* Display list of added phone numbers */}
+            {showAddModal && phoneNumbersList.length > 0 && (
+              <div className={styles.phoneNumbersList}>
+                <div className={styles.phoneNumbersListHeader}>
+                  <span>Əlavə ediləcək nömrələr ({phoneNumbersList.length})</span>
+                </div>
+                <div className={styles.phoneNumbersListItems}>
+                  {phoneNumbersList.map((phone, index) => (
+                    <div key={index} className={styles.phoneNumberItem}>
+                      <span className={styles.phoneNumberText}>({phone})</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemovePhoneFromList(index)}
+                        className={styles.removePhoneButton}
+                        title="Sil"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           
           <div className={styles.formGroup}>
