@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { X, Phone, DollarSign, User, Tag, FileText, Plus } from 'lucide-react';
+import { X, Phone, DollarSign, User, Tag, Plus } from 'lucide-react';
 import styles from './AddEditNumberModal.module.css';
 
 interface FormData {
@@ -306,26 +306,6 @@ export default function AddEditNumberModal({
                   {type}
                 </button>
               ))}
-            </div>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.formLabel}>
-              <FileText size={16} />
-              Açıqlama (istəyə bağlı)
-            </label>
-            <div className={styles.inputContainer}>
-              <textarea
-                value={formData.description}
-                onChange={(e) => {
-                  if (showAddModal) return; // block editing in add-new modal
-                  setFormData({...formData, description: e.target.value});
-                }}
-                placeholder={showAddModal ? 'Açıqlama hazırda deaktivdir' : 'Nömrə haqqında əlavə məlumat...'}
-                className={`${styles.formInput} ${styles.textareaInput}`}
-                rows={3}
-                disabled={showAddModal}
-              />
             </div>
           </div>
 
