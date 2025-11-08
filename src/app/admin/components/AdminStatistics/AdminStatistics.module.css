@@ -13,22 +13,26 @@
   background: var(--color-white);
   padding: 1rem;
   border-radius: 12px;
-  border-left: 4px solid var(--color-blue);
+  border-left: 4px solid var(--color-orange);
 }
 
 .statCard:nth-child(2) {
-  border-left-color: var(--color-green);
+  border-left-color: var(--color-blue);
 }
 
 .statCard:nth-child(3) {
-  border-left-color: var(--color-yellow);
+  border-left-color: var(--color-green);
 }
 
 .statCard:nth-child(4) {
-  border-left-color: var(--color-purple);
+  border-left-color: var(--color-yellow);
 }
 
 .statCard:nth-child(5) {
+  border-left-color: var(--color-purple);
+}
+
+.statCard:nth-child(6) {
   border-left-color: var(--color-red);
 }
 

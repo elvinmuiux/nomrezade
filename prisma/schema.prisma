@@ -108,6 +108,16 @@ model VisitorLog {
   @@map("visitor_logs")
 }
 
+model MonthlyVisitorStats {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  month      String   @unique // Format: YYYY-MM (e.g., "2025-11")
+  visitors   Int      @default(0)
+  pageViews  Int      @default(0)
+  lastUpdated DateTime @default(now()) @updatedAt
+  
+  @@map("monthly_visitor_stats")
+}
+
 // ==========================================
 // FEEDBACK MODELS
 // ==========================================

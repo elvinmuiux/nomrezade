@@ -78,6 +78,13 @@ export interface UpdateStatisticsRequest {
   action: 'increment_users' | 'increment_sold' | 'increment_visitor';
 }
 
+export interface MonthlyStats {
+  month: string; // Format: YYYY-MM
+  visitors: number;
+  pageViews: number;
+  lastUpdated: string;
+}
+
 // API Service Class
 class ApiService {
   private baseUrl: string;
@@ -229,6 +236,39 @@ class ApiService {
    */
   async incrementVisitors(): Promise<ApiResponse<Statistics>> {
     return this.updateStatistics('increment_visitor');
+  }
+
+  // ===== MONTHLY STATISTICS API =====
+
+  /**
+   * Get monthly visitor statistics
+   */
+  async getMonthlyStats(): Promise<ApiResponse<MonthlyStats>> {
+    return this.request<MonthlyStats>('/api/admin/monthly-stats');
+  }
+
+  /**
+   * Update monthly statistics
+   */
+  async updateMonthlyStats(action: 'increment_visitor' | 'increment_pageview' | 'reset_month'): Promise<ApiResponse<MonthlyStats>> {
+    return this.request<MonthlyStats>('/api/admin/monthly-stats', {
+      method: 'POST',
+      body: JSON.stringify({ action })
+    });
+  }
+
+  /**
+   * Increment monthly visitors
+   */
+  async incrementMonthlyVisitors(): Promise<ApiResponse<MonthlyStats>> {
+    return this.updateMonthlyStats('increment_visitor');
+  }
+
+  /**
+   * Increment monthly page views
+   */
+  async incrementMonthlyPageViews(): Promise<ApiResponse<MonthlyStats>> {
+    return this.updateMonthlyStats('increment_pageview');
   }
 
   // ===== ENHANCED API =====

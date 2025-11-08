@@ -1,5 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+// Track page views for monthly statistics
+async function trackPageView() {
+  try {
+    // Call the API to increment monthly page views
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/admin/monthly-stats`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'increment_pageview' })
+    });
+  } catch (error) {
+    console.error('Error tracking page view:', error);
+  }
+}
+
 export function middleware(request: NextRequest) {
   console.log(`🔍 Middleware triggered for: ${request.nextUrl.pathname}`)
   
@@ -15,6 +29,11 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith('/api/')) {
     console.log(`✅ Allowing API request to: ${pathname}`)
     return NextResponse.next()
+  }
+  
+  // Track page views for non-API routes (fire and forget)
+  if (!pathname.startsWith('/_next') && !pathname.startsWith('/static')) {
+    trackPageView().catch(() => {}); // Don't wait for completion
   }
   
   // Check if this is a blocked path for pages

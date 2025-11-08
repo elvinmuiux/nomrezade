@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import styles from './AdminStatistics.module.css';
 import type { PhoneNumber } from '../../lib/types/types';
+import { apiService } from '@/shared/services/ApiService';
 
 interface AdminStatisticsProps {
   filteredNumbers: PhoneNumber[];
@@ -10,6 +11,9 @@ interface AdminStatisticsProps {
 }
 
 const AdminStatistics = React.memo<AdminStatisticsProps>(({ filteredNumbers, loading = false }) => {
+  const [monthlyVisitors, setMonthlyVisitors] = useState<number>(0);
+  const [monthlyLoading, setMonthlyLoading] = useState<boolean>(true);
+
   const statistics = useMemo(() => {
     const total = filteredNumbers.length;
     const standard = filteredNumbers.filter(n => n.type === 'standard').length;
@@ -20,10 +24,29 @@ const AdminStatistics = React.memo<AdminStatisticsProps>(({ filteredNumbers, loa
     return { total, standard, premium, gold, sellers };
   }, [filteredNumbers]);
 
+  // Fetch monthly visitor statistics
+  useEffect(() => {
+    const fetchMonthlyStats = async () => {
+      try {
+        setMonthlyLoading(true);
+        const response = await apiService.getMonthlyStats();
+        if (response.success && response.data) {
+          setMonthlyVisitors(response.data.pageViews);
+        }
+      } catch (error) {
+        console.error('Error fetching monthly stats:', error);
+      } finally {
+        setMonthlyLoading(false);
+      }
+    };
+
+    fetchMonthlyStats();
+  }, []);
+
   if (loading) {
     return (
       <div className={styles.statsSection}>
-        {Array.from({ length: 5 }, (_, index) => (
+        {Array.from({ length: 6 }, (_, index) => (
           <div key={index} className={styles.statCard}>
             <div className={styles.skeletonStatTitle}></div>
             <div className={styles.skeletonStatNumber}></div>
@@ -35,6 +58,12 @@ const AdminStatistics = React.memo<AdminStatisticsProps>(({ filteredNumbers, loa
 
   return (
     <div className={styles.statsSection}>
+      <div className={styles.statCard}>
+        <h3>Aylıq Ziyarətçi</h3>
+        <p className={styles.statNumber}>
+          {monthlyLoading ? '...' : monthlyVisitors.toLocaleString()}
+        </p>
+      </div>
       <div className={styles.statCard}>
         <h3>Ümumi Nömrələr</h3>
         <p className={styles.statNumber}>{statistics.total}</p>
@@ -62,5 +91,7 @@ const AdminStatistics = React.memo<AdminStatisticsProps>(({ filteredNumbers, loa
 AdminStatistics.displayName = 'AdminStatistics';
 
 export default AdminStatistics;
+
+
 
 
