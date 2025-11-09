@@ -549,7 +549,7 @@ const MobileLayout: React.FC<{
                     <WhatsAppIcon size={16} />
                   </button>
                   <button className={styles.mobileOrderButton} onClick={() => onOrderNumber(ad.phoneNumber, ad.contactPhone || '050-444-44-22')}>
-                    Zəng et
+                    Sifariş
                   </button>
                 </div>
               </div>
@@ -668,7 +668,7 @@ export default function NumbersListing({
   const handleShare = async (phoneNumber: string) => {
     const shareData = {
       title: 'Nomrezade.az - Nömrə',
-      text: `${phoneNumber} nömrəsinə baxın!`,
+      text: `${phoneNumber} səhifəyə daxil olub zövqünüzə uyğun bütün nömrələrə baxa bilərsiniz!`,
       url: window.location.href
     };
 
