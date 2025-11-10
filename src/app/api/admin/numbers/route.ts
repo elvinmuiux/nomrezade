@@ -90,10 +90,11 @@ export async function POST(request: NextRequest) {
     const expiresAt = calculateExpiryDate(adType);
 
     // Create new phone number in MongoDB
+    // IMPORTANT: Convert AZN to qepik (1 AZN = 100 qepik) for storage
     const newNumber = await prisma.phoneNumber.create({
       data: {
         phoneNumber: phoneNumber,
-        price: parseInt(price),
+        price: parseInt(price) * 100, // Convert AZN to qepik
         contactPhone: contactPhone || '',
         description: description || '',
         type: adType,
@@ -186,11 +187,12 @@ export async function PUT(request: NextRequest) {
     const adType = getAdTypeFromString(type);
 
     // Update phone number in MongoDB
+    // IMPORTANT: Convert AZN to qepik (1 AZN = 100 qepik) for storage
     const updatedNumber = await prisma.phoneNumber.update({
       where: { id: id },
       data: {
         phoneNumber: phoneNumber,
-        price: parseInt(price),
+        price: parseInt(price) * 100, // Convert AZN to qepik
         contactPhone: contactPhone || '',
         description: description || '',
         type: adType,
@@ -347,8 +349,10 @@ export async function GET(request: NextRequest) {
     console.log(`📊 Total count: ${total}`);
 
     // Convert Date objects to ISO strings for JSON serialization
+    // IMPORTANT: Convert qepik to AZN (100 qepik = 1 AZN) for display
     const serializedNumbers = phoneNumbers.map(phone => ({
       ...phone,
+      price: Math.round(phone.price / 100), // Convert qepik to AZN
       createdAt: phone.createdAt.toISOString(),
       updatedAt: phone.updatedAt.toISOString(),
       expiresAt: phone.expiresAt.toISOString()

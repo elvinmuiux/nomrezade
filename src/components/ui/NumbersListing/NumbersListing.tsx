@@ -524,7 +524,7 @@ const MobileLayout: React.FC<{
                     aria-label="Paylaş"
                     title="Paylaş"
                   >
-                    <Share2 size={12} />
+                    <Share2 size={16} />
                   </button>
                   <span className={`${styles.mobileTypeTag} ${styles[ad.type]}`}>
                     {ad.type}

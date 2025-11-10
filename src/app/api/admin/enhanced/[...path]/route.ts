@@ -41,7 +41,8 @@ function getOperatorFromPrefix(prefix: string): OperatorCode {
 
 function calculateExpiryDate(type: AdType): Date {
   const now = new Date();
-  const days = type === 'GOLD' ? 30 : type === 'PREMIUM' ? 15 : 7;
+  // FIXED: Standardize expiry dates across all APIs
+  const days = type === 'PREMIUM' ? 30 : type === 'GOLD' ? 20 : 7;
   return new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
@@ -142,14 +143,17 @@ export async function GET(
     console.log(`📱 Found ${phoneNumbers.length} phone numbers`);
 
     // Convert Date objects to ISO strings for JSON serialization
+    // IMPORTANT: Convert qepik to AZN (100 qepik = 1 AZN) for display
     const serializedNumbers = phoneNumbers.map(phone => ({
       ...phone,
+      price: Math.round(phone.price / 100), // Convert qepik to AZN
       createdAt: phone.createdAt.toISOString(),
       updatedAt: phone.updatedAt.toISOString(),
       expiresAt: phone.expiresAt.toISOString()
     }));
 
     // Create enhanced format response
+    // IMPORTANT: Calculate statistics with converted AZN prices
     const enhancedData = {
       operator: operatorCode,
       type: adType,
@@ -160,11 +164,11 @@ export async function GET(
         activeCount: phoneNumbers.filter(phone => phone.status === 'ACTIVE').length,
         soldCount: phoneNumbers.filter(phone => phone.status === 'SOLD').length,
         averagePrice: phoneNumbers.length > 0 
-          ? Math.round(phoneNumbers.reduce((sum, phone) => sum + phone.price, 0) / phoneNumbers.length)
+          ? Math.round(phoneNumbers.reduce((sum, phone) => sum + phone.price, 0) / phoneNumbers.length / 100) // Convert to AZN
           : 0,
         priceRange: {
-          min: phoneNumbers.length > 0 ? Math.min(...phoneNumbers.map(phone => phone.price)) : 0,
-          max: phoneNumbers.length > 0 ? Math.max(...phoneNumbers.map(phone => phone.price)) : 0
+          min: phoneNumbers.length > 0 ? Math.round(Math.min(...phoneNumbers.map(phone => phone.price)) / 100) : 0,
+          max: phoneNumbers.length > 0 ? Math.round(Math.max(...phoneNumbers.map(phone => phone.price)) / 100) : 0
         }
       },
       lastUpdated: new Date().toISOString(),
@@ -311,10 +315,11 @@ export async function POST(
     }
 
     // Create new phone number in MongoDB
+    // IMPORTANT: Convert AZN to qepik (1 AZN = 100 qepik) for storage
     const newNumber = await prisma.phoneNumber.create({
       data: {
         phoneNumber: phoneNumber,
-        price: parseInt(price),
+        price: parseInt(price) * 100, // Convert AZN to qepik
         contactPhone: contactPhone || '',
         description: description || '',
         type: adType,
@@ -337,6 +342,7 @@ export async function POST(
       message: 'Nömrə uğurla əlavə edildi',
       data: {
         ...newNumber,
+        price: Math.round(newNumber.price / 100), // Convert qepik to AZN for response
         createdAt: newNumber.createdAt.toISOString(),
         updatedAt: newNumber.updatedAt.toISOString(),
         expiresAt: newNumber.expiresAt.toISOString()
@@ -476,11 +482,12 @@ export async function PUT(
     }
 
     // Update phone number in MongoDB
+    // IMPORTANT: Convert AZN to qepik (1 AZN = 100 qepik) for storage
     const updatedNumber = await prisma.phoneNumber.update({
       where: { id: id },
       data: {
         phoneNumber: phoneNumber,
-        price: parseInt(price),
+        price: parseInt(price) * 100, // Convert AZN to qepik
         contactPhone: contactPhone || '',
         description: description || '',
         type: adType,
@@ -499,6 +506,7 @@ export async function PUT(
       message: 'Nömrə uğurla yeniləndi',
       data: {
         ...updatedNumber,
+        price: Math.round(updatedNumber.price / 100), // Convert qepik to AZN for response
         createdAt: updatedNumber.createdAt.toISOString(),
         updatedAt: updatedNumber.updatedAt.toISOString(),
         expiresAt: updatedNumber.expiresAt.toISOString()
@@ -610,6 +618,7 @@ export async function DELETE(
       message: 'Nömrə uğurla silindi',
       data: {
         ...deletedNumber,
+        price: Math.round(deletedNumber.price / 100), // Convert qepik to AZN for response
         createdAt: deletedNumber.createdAt.toISOString(),
         updatedAt: deletedNumber.updatedAt.toISOString(),
         expiresAt: deletedNumber.expiresAt.toISOString()
